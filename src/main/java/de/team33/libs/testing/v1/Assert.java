@@ -1,16 +1,29 @@
 package de.team33.libs.testing.v1;
 
 
-public class Assert
+import java.util.Objects;
+
+
+public class Assert<T>
 {
 
-  public static <R, X extends Throwable> Assert that(final Supplier<R, X> supplier)
+  private final T subject;
+
+  private Assert(final T subject)
   {
-    throw new UnsupportedOperationException("not yet implemented");
+    this.subject = subject;
   }
 
-  public interface Supplier<R, X extends Throwable>
+  public static <T> Assert that(final T subject)
   {
-     R get() throws X;
+    return new Assert<>(subject);
+  }
+
+  public void isEqualTo(final Object other)
+  {
+    if (!Objects.equals(subject, other))
+    {
+      throw new AssertionError(String.format("%n%n\tExpected: <%s>%n\t but was: <%s>%n%n", other, subject));
+    }
   }
 }
