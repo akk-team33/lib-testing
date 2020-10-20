@@ -8,7 +8,6 @@
 
 ## pom.xml
 
-    <!-- not yer available -->
     <dependency>
       <groupId>de.team33.libs</groupId>
       <artifactId>lib-testing-01</artifactId>
