@@ -61,7 +61,7 @@ public class RunnerTest {
         assertEquals(COUNT, counter.get());
     }
 
-    @Test//(expected = IOException.class)
+    @Test(expected = IOException.class)
     public final void sequentialFail() throws IOException {
         sequential(COUNT, () -> {
             throw new IOException();
