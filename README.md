@@ -1,13 +1,16 @@
-# lib-exceptional
+# lib-testing
+
+    Stuff for testing
 
 ## Requires
 
-    Java 8
+    Java 8 or higher
 
 ## pom.xml
 
+    <!-- not yer available -->
     <dependency>
       <groupId>de.team33.libs</groupId>
-      <artifactId>lib-exceptional</artifactId>
-      <version>8.2.2</version>
+      <artifactId>lib-testing-01</artifactId>
+      <version>1.0.0</version>
     </dependency>
