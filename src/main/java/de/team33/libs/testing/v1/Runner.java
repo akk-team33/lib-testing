@@ -17,11 +17,13 @@ public class Runner<X extends Exception> {
     }
 
     public static <X extends Exception> Runner parallel(final int count, final XRunnable<X> xRunnable) throws X {
-        return new Runner<>(count, xRunnable).runParallel();
+        return new Runner<>(count, xRunnable).runParallel()
+                                             .reThrowCaughtIfPresent();
     }
 
     public static <X extends Exception> Runner sequential(final int count, final XRunnable<X> xRunnable) throws X {
-        return new Runner<>(count, xRunnable).runSequential();
+        return new Runner<>(count, xRunnable).runSequential()
+                                             .reThrowCaughtIfPresent();
     }
 
     private Runner<X> runSequential() throws X {
@@ -32,7 +34,7 @@ public class Runner<X extends Exception> {
                 addCaught(caught);
             }
         }
-        return reThrowCaughtIfPresent();
+        return this;
     }
 
     private Runner<X> runParallel() throws X {
@@ -49,7 +51,7 @@ public class Runner<X extends Exception> {
                 addCaught(caught);
             }
         }
-        return reThrowCaughtIfPresent();
+        return this;
     }
 
     private Runner<X> reThrowCaughtIfPresent() throws X {
