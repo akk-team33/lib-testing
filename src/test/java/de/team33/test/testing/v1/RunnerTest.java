@@ -3,7 +3,6 @@ package de.team33.test.testing.v1;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static de.team33.libs.testing.v1.Runner.parallel;
 import static de.team33.libs.testing.v1.Runner.sequential;
@@ -16,19 +15,19 @@ public class RunnerTest {
     public static final int COUNT = 100;
 
     @Test
-    public final void parallelAtomic() {
-        final AtomicInteger counter = new AtomicInteger(0);
+    public final void parallelSync() throws InterruptedException {
+        final Synchronous counter = new Synchronous(0);
         parallel(COUNT, () -> {
-            counter.incrementAndGet();
+            counter.increment();
         });
         assertEquals(COUNT, counter.get());
     }
 
     @Test
-    public final void parallelWeak() throws InterruptedException {
-        final WeakInteger counter = new WeakInteger(0);
+    public final void parallelAsync() throws InterruptedException {
+        final Asynchronous counter = new Asynchronous(0);
         parallel(COUNT, () -> {
-            counter.incrementAndGet();
+            counter.increment();
         });
         final String message = String.format("counter expected to be significant less than COUNT (%d) but was %d",
                                              COUNT, counter.get());
@@ -44,19 +43,19 @@ public class RunnerTest {
     }
 
     @Test
-    public final void sequentialAtomic() {
-        final AtomicInteger counter = new AtomicInteger(0);
+    public final void sequentialSync() throws InterruptedException {
+        final Synchronous counter = new Synchronous(0);
         sequential(COUNT, () -> {
-            counter.incrementAndGet();
+            counter.increment();
         });
         assertEquals(COUNT, counter.get());
     }
 
     @Test
-    public final void sequentialWeak() throws InterruptedException {
-        final WeakInteger counter = new WeakInteger(0);
+    public final void sequentialAsync() throws InterruptedException {
+        final Asynchronous counter = new Asynchronous(0);
         sequential(COUNT, () -> {
-            counter.incrementAndGet();
+            counter.increment();
         });
         assertEquals(COUNT, counter.get());
     }
@@ -69,19 +68,37 @@ public class RunnerTest {
         fail("Expected: IOException");
     }
 
-    static final class WeakInteger {
+    static final class Asynchronous {
 
         private int value;
 
-        WeakInteger(final int value) {
+        Asynchronous(final int value) {
             this.value = value;
         }
 
-        int incrementAndGet() throws InterruptedException {
+        void increment() throws InterruptedException {
             final int result = value + 1;
             Thread.sleep(1);
             value = result;
-            return result;
+        }
+
+        int get() {
+            return value;
+        }
+    }
+
+    static final class Synchronous {
+
+        private int value;
+
+        Synchronous(final int value) {
+            this.value = value;
+        }
+
+        synchronized void increment() throws InterruptedException {
+            final int result = value + 1;
+            Thread.sleep(1);
+            value = result;
         }
 
         int get() {
