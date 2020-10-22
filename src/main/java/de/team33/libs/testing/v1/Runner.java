@@ -1,15 +1,16 @@
 package de.team33.libs.testing.v1;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Runner<X extends Exception> {
 
     private final int count;
     private final XRunnable<X> xRunnable;
-    private final List<Throwable> headCaught = new ArrayList<>(1);
+
+    private List<Throwable> caughtList = Collections.emptyList();
 
     private Runner(final int count, final XRunnable<X> xRunnable) {
         this.count = count;
@@ -27,35 +28,27 @@ public class Runner<X extends Exception> {
     }
 
     private Runner<X> runSequential() throws X {
+        caughtList = new LinkedList<>();
         for (int i = 0; i < count; ++i) {
             try {
                 xRunnable.run();
             } catch (final Throwable caught) {
-                addCaught(caught);
+                caughtList.add(caught);
             }
         }
         return this;
     }
 
-    private Runner<X> runParallel() throws X {
-        final List<Thread> threads = Stream.generate(() -> new Thread(runnable(xRunnable)))
-                                           .limit(count)
-                                           .collect(Collectors.toList());
-        for (Thread thread : threads) {
-            thread.start();
-        }
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (final InterruptedException caught) {
-                addCaught(caught);
-            }
-        }
+    private Runner<X> runParallel() {
+        final Threads threads = new Threads(count, xRunnable);
+        this.caughtList = threads.start()
+                                 .join()
+                                 .mapCaught(stream -> stream.collect(Collectors.toList()));
         return this;
     }
 
     private Runner<X> reThrowCaughtIfPresent() throws X {
-        final Throwable caught = (0 < headCaught.size()) ? headCaught.get(0) : null;
+        final Throwable caught = caughtList.stream().reduce(Runner::addSuppressed).orElse(null);
         if (caught instanceof Error) {
             throw (Error)caught;
         } else if (caught instanceof RuntimeException) {
@@ -68,23 +61,8 @@ public class Runner<X extends Exception> {
         return this;
     }
 
-    private Runnable runnable(final XRunnable<X> xRunnable) {
-        return () -> {
-            try {
-                xRunnable.run();
-            } catch (final Throwable caught) {
-                addCaught(caught);
-            }
-        };
-    }
-
-    private void addCaught(final Throwable caught) {
-        synchronized (headCaught) {
-            if (0 < headCaught.size()) {
-                headCaught.get(0).addSuppressed(caught);
-            } else {
-                headCaught.add(caught);
-            }
-        }
+    private static Throwable addSuppressed(final Throwable main, final Throwable suppressed) {
+        main.addSuppressed(suppressed);
+        return main;
     }
 }
