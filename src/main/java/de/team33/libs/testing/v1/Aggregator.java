@@ -23,9 +23,8 @@ class Aggregator<C, E> {
     }
 
     final synchronized <R> R map(final Function<Stream<E>, R> method) {
-        final Stream<E> stream = backing.values()
-                                        .stream()
-                                        .flatMap(List::stream);
-        return method.apply(stream);
+        return method.apply(backing.values()
+                                   .stream()
+                                   .flatMap(List::stream));
     }
 }

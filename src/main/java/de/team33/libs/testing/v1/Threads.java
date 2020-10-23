@@ -1,7 +1,6 @@
 package de.team33.libs.testing.v1;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -36,34 +35,18 @@ class Threads {
     }
 
     final Threads join() {
-        final List<Throwable> caughtList = new LinkedList<>();
         for (Thread thread : threads) {
             try {
                 thread.join();
             } catch (final InterruptedException caught) {
-                caughtList.add(caught);
+                aggregator.add(ExType.ERROR, new Error(caught.getMessage(), caught));
             }
-        }
-        if (0 < caughtList.size()) {
-            final JoinError error = new JoinError(caughtList);
-            throw aggregator.map(stream -> {
-                stream.forEach(error::addSuppressed);
-                return error;
-            });
         }
         return this;
     }
 
     final <R> R mapCaught(final Function<Stream<Throwable>, R> method) {
         return aggregator.map(method);
-    }
-
-    private static class JoinError extends Error {
-
-        private JoinError(final List<Throwable> caughtList) {
-            super("Unexpected: " + caughtList.get(0).getMessage());
-            caughtList.forEach(this::addSuppressed);
-        }
     }
 
     private enum ExType {
