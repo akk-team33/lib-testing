@@ -1,68 +1,45 @@
 package de.team33.libs.testing.v1;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * @deprecated use {@link Attempts} instead
+ */
+@Deprecated
 public class Runner<X extends Exception> {
 
     private final int count;
     private final XRunnable<X> xRunnable;
-
-    private List<Throwable> caughtList = Collections.emptyList();
 
     private Runner(final int count, final XRunnable<X> xRunnable) {
         this.count = count;
         this.xRunnable = xRunnable;
     }
 
+    /**
+     * @deprecated use {@link Attempts#tryParallel(int, XRunnable)} instead
+     */
+    @Deprecated
     public static <X extends Exception> Runner parallel(final int count, final XRunnable<X> xRunnable) throws X {
-        return new Runner<>(count, xRunnable).runParallel()
-                                             .reThrowCaughtIfPresent();
+        return new Runner<>(count, xRunnable).runParallel();
     }
 
+    /**
+     * @deprecated use {@link Attempts#trySerial(int, XRunnable)} instead
+     */
+    @Deprecated
     public static <X extends Exception> Runner sequential(final int count, final XRunnable<X> xRunnable) throws X {
-        return new Runner<>(count, xRunnable).runSequential()
-                                             .reThrowCaughtIfPresent();
+        return new Runner<>(count, xRunnable).runSequential();
     }
 
     private Runner<X> runSequential() throws X {
-        caughtList = new LinkedList<>();
-        for (int i = 0; i < count; ++i) {
-            try {
-                xRunnable.run();
-            } catch (final Throwable caught) {
-                caughtList.add(caught);
-            }
-        }
+        Attempts.trySerial(count, xRunnable);
         return this;
     }
 
-    private Runner<X> runParallel() {
-        final Threads threads = new Threads(count, xRunnable);
-        this.caughtList = threads.start()
-                                 .join()
-                                 .mapCaught(stream -> stream.collect(Collectors.toList()));
+    private Runner<X> runParallel() throws X {
+        Attempts.tryParallel(count, xRunnable);
         return this;
-    }
-
-    private Runner<X> reThrowCaughtIfPresent() throws X {
-        final Throwable caught = caughtList.stream().reduce(Runner::addSuppressed).orElse(null);
-        if (caught instanceof Error) {
-            throw (Error)caught;
-        } else if (caught instanceof RuntimeException) {
-            throw (RuntimeException)caught;
-        } else if (caught != null) {
-            // a checked exception must be of type <X> ...
-            // noinspection unchecked
-            throw (X)caught;
-        }
-        return this;
-    }
-
-    private static Throwable addSuppressed(final Throwable main, final Throwable suppressed) {
-        main.addSuppressed(suppressed);
-        return main;
     }
 }
