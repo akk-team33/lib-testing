@@ -11,5 +11,5 @@
     <dependency>
       <groupId>de.team33.libs</groupId>
       <artifactId>lib-testing-01</artifactId>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
     </dependency>
