@@ -14,11 +14,6 @@
     <name>Team33 Async Library - Edition "thebe"</name>
     <description>Tools and utilities for testing asynchronous processing.</description>
 
-    <properties>
-        <!-- preliminary ... -->
-        <skipDeploy>true</skipDeploy>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
