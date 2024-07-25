@@ -1,10 +1,10 @@
-# lib-mm-template
+# lib-testing
 
-Team33 Template Library Collection
+Team33 Testing Library Collection
 
 ## Home
 
-http://www.team33.de/dev/template/1.x
+http://www.team33.de/dev/testing/1.x
 
 ## Requires
 
@@ -12,22 +12,15 @@ http://www.team33.de/dev/template/1.x
 
 ## Artifacts
 
-* template-bom (Team33 Template Library BOM)
-* template-lib (Team33 Template Library)
-  * template-module-alpha (Team33 Module-A Library - Edition "alpha")
-  * template-module-beta (Team33 Module-A Library - Edition "beta")
-  * template-module-gamma (Team33 Module-A Library - Edition "gamma")
+* testing-bom (Team33 Testing Library BOM)
+* testing-lib (Team33 Testing Library)
+  * async-thebe (Team33 Async Library - Edition "thebe")
+  * testing-module-beta (Team33 Testing Module Library - Edition "beta")
+  * testing-module-gamma (Team33 Testing Module Library - Edition "gamma")
 
 ## Change Log
 
-### 1.0.0-SNAPSHOT
+### 1.0.0
 
-Created ...
-* template-root (Team33 Template Library Root)
-  * template-bom (Team33 Template Library BOM)
-  * template-home (Team33 Template Library Home)
-  * template-lib (Team33 Template Library)
-    * template-module-alpha (Team33 Module-A Library - Edition "alpha")
-    * template-module-beta (Team33 Module-A Library - Edition "beta")
-    * template-module-gamma (Team33 Module-A Library - Edition "gamma")
+* Added module async-thebe
 

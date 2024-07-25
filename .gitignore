@@ -1,6 +1,6 @@
 # mvn / build artifacts
 target/
-/template-home/src/main/generated/
+/testing-home/src/main/generated/
 
 # Mac artifacts
 .DS_Store

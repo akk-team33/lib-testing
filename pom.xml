@@ -2,14 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.team33.template</groupId>
-    <artifactId>template-root</artifactId>
+    <groupId>de.team33.testing</groupId>
+    <artifactId>testing-root</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Team33 Template Library Root</name>
-    <description>Root of team33 template library collection</description>
-    <url>http://team33.de/dev/template/1.x</url>
+    <name>Team33 Testing Library Root</name>
+    <description>Team33 Testing Library Collection - Root Module</description>
+    <url>http://team33.de/dev/testing/1.x</url>
 
     <licenses>
         <license>
@@ -26,9 +26,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git://github.com/akk-team33/lib-mm-template.git</connection>
-        <developerConnection>scm:git:ssh://github.com:akk-team33/lib-mm-template.git</developerConnection>
-        <url>https://github.com/akk-team33/lib-mm-template</url>
+        <connection>scm:git:git://github.com/akk-team33/lib-testing.git</connection>
+        <developerConnection>scm:git:ssh://github.com:akk-team33/lib-testing.git</developerConnection>
+        <url>https://github.com/akk-team33/lib-testing</url>
     </scm>
 
     <properties>
@@ -42,9 +42,9 @@
     </properties>
 
     <modules>
-        <module>template-bom</module>
-        <module>template-lib</module>
-        <module>template-home</module>
+        <module>testing-bom</module>
+        <module>testing-lib</module>
+        <module>testing-home</module>
     </modules>
 
     <build>
