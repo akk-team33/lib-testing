@@ -1,0 +1,15 @@
+# mvn / build artifacts
+target/
+/template-home/src/main/generated/
+
+# Mac artifacts
+.DS_Store
+
+# IntelliJ IDEA artifacts
+/.idea/
+*.iml
+
+# eclipse artifacts
+/.classpath
+/.project
+/.settings

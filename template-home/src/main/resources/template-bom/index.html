@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>de.team33.template:template-bom - Java Development by Andreas Kluge-Kaindl, Bremen (de)</title>
+    <style>
+        a:link {
+            text-decoration: inherit;
+        }
+        a:hover {
+            background-color: #c0c0c0;
+        }
+        .light {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+<h5><a href="..">de.team33.template - Java Development by Andreas Kluge-Kaindl, Bremen (de)</a></h5>
+<h1>Team33 Template Library BOM</h1>
+<ul><li>de.team33.template:template-bom</li></ul>
+<h2>Current Version</h2>
+<ul><li>${project.version}</li></ul>
+<h2>Description</h2>
+<ul><li>team33 template library collection - bill of materials</li>
+    <li>Manages dependencies when using multiple libraries from this library collection.</li></ul>
+<h2>Resources</h2>
+<ul>
+    <li><a href="https://github.com/akk-team33/lib-mm-template/tree/main/template-bom" target="_blank">GitHub</a></li>
+    <li><a href="https://mvnrepository.com/artifact/de.team33.template/template-bom/" target="_blank">MVN<small>REPOSITORY</small></a></li>
+    <li><a href="https://repo.maven.apache.org/maven2/de/team33/template/template-bom/" target="_blank">Maven Central</a></li>
+</ul>
+<h2>Maven</h2>
+<pre>
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            <span class="light">...</span>
+            &lt;dependency&gt;
+                &lt;groupId&gt;de.team33.template&lt;/groupId&gt;
+                &lt;artifactId&gt;template-bom&lt;/artifactId&gt;
+                &lt;version&gt;${project.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+            <span class="light">...</span>
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+</pre>
+</body>
+</html>
