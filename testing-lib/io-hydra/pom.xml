@@ -14,11 +14,6 @@
     <name>Team33 IO Library - Edition "Hydra"</name>
     <description>Tools and utilities for simple file copying within testing</description>
 
-    <properties>
-        <!-- preliminary ... -->
-        <skipDeploy>true</skipDeploy>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>de.team33.patterns</groupId>

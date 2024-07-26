@@ -14,11 +14,6 @@
     <name>Team33 StdIO Library - Edition "Ersa"</name>
     <description>Tools and utilities to handle standard io while testing</description>
 
-    <properties>
-        <!-- preliminary ... -->
-        <skipDeploy>true</skipDeploy>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
