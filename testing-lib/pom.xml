@@ -16,7 +16,7 @@
 
     <modules>
         <module>async-thebe</module>
-        <module>testing-module-beta</module>
+        <module>stdio-ersa</module>
         <module>testing-module-gamma</module>
     </modules>
 
