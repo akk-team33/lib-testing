@@ -8,11 +8,11 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>testing-module-gamma</artifactId>
+    <artifactId>io-hydra</artifactId>
     <packaging>jar</packaging>
 
-    <name>Team33 Async Library - Edition "thebe"</name>
-    <description>Classes and utilities for implementing and handling builders.</description>
+    <name>Team33 IO Library - Edition "Hydra"</name>
+    <description>Tools and utilities for simple file copying within testing</description>
 
     <properties>
         <!-- preliminary ... -->
@@ -20,6 +20,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>de.team33.patterns</groupId>
+            <artifactId>io-deimos</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

@@ -14,13 +14,15 @@ http://www.team33.de/dev/testing/1.x
 
 * testing-bom (Team33 Testing Library BOM)
 * testing-lib (Team33 Testing Library)
-  * async-thebe (Team33 Async Library - Edition "thebe")
-  * stdio-ersa (Team33 Testing Module Library - Edition "beta")
-  * testing-module-gamma (Team33 Testing Module Library - Edition "gamma")
+  * async-thebe (Team33 Async Library - Edition "Thebe")
+  * stdio-ersa (Team33 StdIO Library - Edition "Ersa")
+  * io-hydra (Team33 IO Library - Edition "Hydra")
 
 ## Change Log
 
 ### 1.0.0
 
 * Added module async-thebe
+* Added module stdio-ersa
+* Added module io-hydra
 

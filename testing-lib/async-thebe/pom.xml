@@ -11,7 +11,7 @@
     <artifactId>async-thebe</artifactId>
     <packaging>jar</packaging>
 
-    <name>Team33 Async Library - Edition "thebe"</name>
+    <name>Team33 Async Library - Edition "Thebe"</name>
     <description>Tools and utilities for testing asynchronous processing.</description>
 
     <dependencies>

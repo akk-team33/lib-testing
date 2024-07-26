@@ -32,7 +32,7 @@
             </dependency>
             <dependency>
                 <groupId>de.team33.testing</groupId>
-                <artifactId>testing-module-gamma</artifactId>
+                <artifactId>io-hydra</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

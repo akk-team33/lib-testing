@@ -17,7 +17,7 @@
     <modules>
         <module>async-thebe</module>
         <module>stdio-ersa</module>
-        <module>testing-module-gamma</module>
+        <module>io-hydra</module>
     </modules>
 
     <dependencyManagement>
@@ -27,6 +27,15 @@
                 <groupId>de.team33.testing</groupId>
                 <artifactId>testing-bom</artifactId>
                 <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Team33 Depts -->
+            <dependency>
+                <groupId>de.team33.patterns</groupId>
+                <artifactId>patterns-bom</artifactId>
+                <version>1.19.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
