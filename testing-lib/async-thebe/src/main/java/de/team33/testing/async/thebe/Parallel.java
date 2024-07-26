@@ -1,5 +1,7 @@
 package de.team33.testing.async.thebe;
 
+import de.team33.patterns.exceptional.dione.XFunction;
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
@@ -23,7 +25,7 @@ public final class Parallel<R> {
   private final AtomicInteger operationCounter = new AtomicInteger(0);
   private final List<Thread> threads;
 
-  private Parallel(final int numberOfThreads, final Operation<R> operation) {
+  private Parallel(final int numberOfThreads, final XFunction<Context ,R, ?> operation) {
     this.threads = unmodifiableList(IntStream.range(0, numberOfThreads)
                                              .mapToObj(threadIndex -> newThread(threadIndex, operation))
                                              .collect(toList()));
@@ -39,7 +41,7 @@ public final class Parallel<R> {
    * @param operation       The operation to be performed.
    * @param <R>             The type of result of the operation to be performed.
    */
-  public static <R> Report<R> report(final int numberOfThreads, final Operation<R> operation) {
+  public static <R> Report<R> report(final int numberOfThreads, final XFunction<Context ,R, ?> operation) {
     return new Parallel<R>(numberOfThreads, operation).startThreads()
                                                       .joinThreads()
                                                       .report();
@@ -57,24 +59,25 @@ public final class Parallel<R> {
    * @throws Exception If any Exception occurs while executing the Operation
    */
   @SuppressWarnings("ProhibitedExceptionDeclared")
-  public static <R> Stream<R> stream(final int numberOfThreads, final Operation<R> operation) throws Exception {
+  public static <R> Stream<R> stream(final int numberOfThreads,
+                                     final XFunction<Context ,R, ?> operation) throws Exception {
     return report(numberOfThreads, operation).reThrow(Error.class)
                                              .reThrow(Exception.class)
                                              .stream();
   }
 
-  private Thread newThread(final int threadIndex, final Operation<R> operation) {
+  private Thread newThread(final int threadIndex, final XFunction<Context ,R, ?> operation) {
     //noinspection ObjectToString
     return new Thread(newRunnable(operation), this + ":" + threadIndex);
   }
 
   @SuppressWarnings({"BoundedWildcard", "OverlyBroadCatchBlock"})
-  private Runnable newRunnable(final Operation<R> operation) {
+  private Runnable newRunnable(final XFunction<Context ,R, ?> operation) {
     return () -> {
       final int threadIndex = threadCounter.getAndIncrement();
       for (int loop = 0; (loop == 0) || (threadCounter.get() < threads.size()); ++loop) {
         try {
-          report.add(operation.operate(new Context(threadIndex, operationCounter.getAndIncrement(), loop)));
+          report.add(operation.apply(new Context(threadIndex, operationCounter.getAndIncrement(), loop)));
         } catch (final Throwable e) {
           report.add(e);
         }

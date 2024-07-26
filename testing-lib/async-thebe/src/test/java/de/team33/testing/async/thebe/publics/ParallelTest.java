@@ -1,7 +1,7 @@
 package de.team33.testing.async.thebe.publics;
 
+import de.team33.patterns.exceptional.dione.XFunction;
 import de.team33.testing.async.thebe.Context;
-import de.team33.testing.async.thebe.Operation;
 import de.team33.testing.async.thebe.Parallel;
 import de.team33.testing.async.thebe.Report;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParallelTest extends Random {
 
-    private static final Operation<Context> OPERATION = context -> {
+    private static final XFunction<Context, Context, ?> OPERATION = context -> {
         Thread.sleep(0);
 //        System.out.printf("threadIndex: %d, operationIndex: %d, loopIndex: %d%n",
 //                          input.threadIndex, input.operationIndex, input.loopIndex);

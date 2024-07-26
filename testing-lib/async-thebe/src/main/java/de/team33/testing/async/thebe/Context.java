@@ -1,10 +1,11 @@
 package de.team33.testing.async.thebe;
 
 /**
- * Summarizes various input parameters that may be of interest in the context of the execution of an {@link Operation}.
+ * Summarizes various input parameters that may be of interest in the context of the execution of an
+ * {@link de.team33.patterns.exceptional.dione.XFunction Operation}.
  *
- * @see Parallel#report(int, Operation)
- * @see Parallel#stream(int, Operation)
+ * @see Parallel#report(int, de.team33.patterns.exceptional.dione.XFunction)
+ * @see Parallel#stream(int, de.team33.patterns.exceptional.dione.XFunction)
  */
 public class Context {
 
