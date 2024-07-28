@@ -17,18 +17,18 @@ import static java.util.Collections.unmodifiableList;
 public final class Report<R> {
 
   private final List<R> results;
-  private final List<Throwable> throwables;
+  private final List<Throwable> caught;
 
   @SuppressWarnings("WeakerAccess")
-  Report(final Builder<R> builder) {
+  private Report(final Builder<R> builder) {
     this.results = unmodifiableList(new ArrayList<>(builder.results));
-    this.throwables = unmodifiableList(new ArrayList<>(builder.throwables));
+    this.caught = unmodifiableList(new ArrayList<>(builder.caught));
   }
 
   /**
    * Returns a {@link List} of all results that have accumulated during reporting.
    */
-  public final List<R> getResults() {
+  public final List<R> list() {
     return results;
   }
 
@@ -43,7 +43,7 @@ public final class Report<R> {
    * Returns a {@link List} of all {@linkplain Throwable exceptions} that occurred during reporting.
    */
   public final List<Throwable> getCaught() {
-    return throwables;
+    return caught;
   }
 
   /**
@@ -56,16 +56,16 @@ public final class Report<R> {
   @SafeVarargs
   public final <X extends Throwable> List<X> getCaught(final Class<X> xClass,
                                                        final Class<? extends X>... ignorable) {
-    return stream(xClass, ignorable).collect(Collectors.toList());
+    return streamCaught(xClass, ignorable).collect(Collectors.toList());
   }
 
   @SafeVarargs
-  private final <X extends Throwable> Stream<X> stream(final Class<X> xClass,
-                                                       final Class<? extends X>... ignorable) {
-    return throwables.stream()
-                     .filter(xClass::isInstance)
-                     .map(xClass::cast)
-                     .filter(throwable -> Stream.of(ignorable)
+  private final <X extends Throwable> Stream<X> streamCaught(final Class<X> xClass,
+                                                             final Class<? extends X>... ignorable) {
+    return caught.stream()
+                 .filter(xClass::isInstance)
+                 .map(xClass::cast)
+                 .filter(throwable -> Stream.of(ignorable)
                                                 .noneMatch(iClass -> iClass.isInstance(throwable)));
   }
 
@@ -81,11 +81,11 @@ public final class Report<R> {
   public final <X extends Throwable> Report<R> reThrow(final Class<X> xClass,
                                                        final Class<? extends X>... ignorable) throws X {
     // First ...
-    final X caught = stream(xClass, ignorable).findAny().orElse(null);
+    final X caught = streamCaught(xClass, ignorable).findAny().orElse(null);
     if (null != caught) {
       // Add the rest ...
-      stream(Throwable.class).filter(more -> more != caught)
-                             .forEach(caught::addSuppressed);
+      streamCaught(Throwable.class).filter(more -> more != caught)
+                                   .forEach(caught::addSuppressed);
       throw caught;
     }
     return this;
@@ -103,7 +103,7 @@ public final class Report<R> {
   @SuppressWarnings("UnusedReturnValue")
   static class Builder<R> {
 
-    final List<Throwable> throwables = synchronizedList(new LinkedList<>());
+    final List<Throwable> caught = synchronizedList(new LinkedList<>());
     final List<R> results = synchronizedList(new LinkedList<>());
 
     final Report<R> build() {
@@ -111,7 +111,7 @@ public final class Report<R> {
     }
 
     final Builder<R> add(final Throwable caught) {
-      throwables.add(caught);
+      this.caught.add(caught);
       return this;
     }
 
