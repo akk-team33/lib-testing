@@ -4,7 +4,7 @@
 
     <groupId>de.team33.testing</groupId>
     <artifactId>testing-root</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Team33 Testing Library Root</name>
