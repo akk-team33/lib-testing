@@ -20,6 +20,11 @@ http://www.team33.de/dev/testing/1.x
 
 ## Change Log
 
+### 1.0.1
+
+* refined testing-bom
+  * &lt;scope&gt; defaults to _test_ for each code module
+
 ### 1.0.0
 
 * Added module async-thebe

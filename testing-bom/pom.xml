@@ -24,16 +24,19 @@
                 <groupId>de.team33.testing</groupId>
                 <artifactId>async-thebe</artifactId>
                 <version>${project.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>de.team33.testing</groupId>
                 <artifactId>stdio-ersa</artifactId>
                 <version>${project.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>de.team33.testing</groupId>
                 <artifactId>io-hydra</artifactId>
                 <version>${project.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
