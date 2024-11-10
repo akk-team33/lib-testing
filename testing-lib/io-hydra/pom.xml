@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.team33.testing</groupId>
         <artifactId>testing-lib</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>io-hydra</artifactId>
@@ -18,6 +18,10 @@
         <dependency>
             <groupId>de.team33.patterns</groupId>
             <artifactId>io-deimos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.team33.patterns</groupId>
+            <artifactId>io-phobos</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

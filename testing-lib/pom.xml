@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.team33.testing</groupId>
         <artifactId>testing-root</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>testing-lib</artifactId>
@@ -35,7 +35,7 @@
             <dependency>
                 <groupId>de.team33.patterns</groupId>
                 <artifactId>patterns-bom</artifactId>
-                <version>1.19.1</version>
+                <version>1.21.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

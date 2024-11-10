@@ -1,5 +1,7 @@
 package de.team33.testing.io.hydra;
 
+import de.team33.patterns.io.phobos.FileEntry;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -15,6 +17,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @deprecated use {@link de.team33.patterns.io.phobos.FileUtil#report(FileEntry)} instead.
+ */
+@Deprecated
 public class FileInfo {
 
     private static final Comparator<Path> ORDER = Comparator.comparing(path -> path.getFileName().toString());

@@ -20,9 +20,14 @@ http://www.team33.de/dev/testing/1.x
 
 ## Change Log
 
+### 1.0.2
+
+* Module io-hydra
+  * Marked class FileInfo as deprecated
+
 ### 1.0.1
 
-* refined testing-bom
+* Refined testing-bom
   * &lt;scope&gt; defaults to _test_ for each code module
 
 ### 1.0.0
