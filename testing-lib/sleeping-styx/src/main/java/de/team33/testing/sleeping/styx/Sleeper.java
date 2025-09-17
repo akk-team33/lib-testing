@@ -9,6 +9,9 @@ public class Sleeper {
     }
 
     public final void sleep(final long time, final TimeUnit unit) {
-        throw new UnsupportedOperationException("not yet implemented");
+        final long target = System.nanoTime() + unit.toNanos(time);
+        while (System.nanoTime() < target) {
+            // nothing to do
+        }
     }
 }
