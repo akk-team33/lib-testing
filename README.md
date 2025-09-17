@@ -20,9 +20,13 @@ http://www.team33.de/dev/testing/1.x
 
 ## Change Log
 
+### 1.1.0
+
+* Added module sleeping-styx
+
 ### 1.0.2
 
-* Module io-hydra
+* Module io-hydra ..
   * Marked class FileInfo as deprecated
 
 ### 1.0.1
