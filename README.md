@@ -14,6 +14,7 @@ http://www.team33.de/dev/testing/1.x
 
 * testing-bom (Team33 Testing Library BOM)
 * testing-lib (Team33 Testing Library)
+  * sleeping-styx (Team33 Sleeping Library - Edition "Styx")
   * async-thebe (Team33 Async Library - Edition "Thebe")
   * stdio-ersa (Team33 StdIO Library - Edition "Ersa")
   * io-hydra (Team33 IO Library - Edition "Hydra")
