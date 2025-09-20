@@ -1,4 +1,4 @@
-package de.team33.testing.sleeping.styx;
+package de.team33.testing.bridging.styx;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,6 +1,6 @@
-package de.team33.testing.sleeping.styx.publics;
+package de.team33.testing.bridging.styx.publics;
 
-import de.team33.testing.sleeping.styx.Bridger;
+import de.team33.testing.bridging.styx.Bridger;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
