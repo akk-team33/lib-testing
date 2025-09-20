@@ -8,10 +8,10 @@
         <version>1.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>sleeping-styx</artifactId>
+    <artifactId>bridging-styx</artifactId>
     <packaging>jar</packaging>
 
-    <name>Team33 Sleeping Library - Edition "Styx"</name>
+    <name>Team33 Bridging Library - Edition "Styx"</name>
     <description>Provides methods to bridge short periods of time during a test.</description>
 
     <dependencies>

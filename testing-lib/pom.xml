@@ -15,7 +15,7 @@
     <description>Parent of team33 testing library collection</description>
 
     <modules>
-        <module>sleeping-styx</module>
+        <module>bridging-styx</module>
         <module>async-thebe</module>
         <module>stdio-ersa</module>
         <module>io-hydra</module>
