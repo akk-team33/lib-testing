@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <name>Team33 Sleeping Library - Edition "Styx"</name>
-    <description>Provides an alternative to Thread.sleep() to bridge definable periods of time during a test.</description>
+    <description>Provides methods to bridge short periods of time during a test.</description>
 
     <dependencies>
         <dependency>
