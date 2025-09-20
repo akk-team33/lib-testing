@@ -27,16 +27,21 @@ public final class ZipIO {
     }
 
     private static Void unzip(final InputStream in, final Path targetRoot) throws IOException {
+        final Path normalTargetRoot = targetRoot.toAbsolutePath().normalize();
         try (final ZipInputStream zipIn = new ZipInputStream(in)) {
             int counter = 0;
             ZipEntry entry = zipIn.getNextEntry();
             while (null != entry) {
-                // Empty directories will be skipped ...
-                if (!entry.isDirectory()) {
-                    final Path target = targetRoot.resolve(entry.getName());
-                    Files.createDirectories(target.getParent());
-                    Files.copy(zipIn, target, StandardCopyOption.REPLACE_EXISTING);
-                    Files.setLastModifiedTime(target, entry.getLastModifiedTime());
+                final Path target = normalTargetRoot.resolve(entry.getName()).toAbsolutePath().normalize();
+                // Cases of path injection will be skipped ...
+                if (target.startsWith(normalTargetRoot)) {
+                    if (entry.isDirectory()) {
+                        Files.createDirectories(target);
+                    } else {
+                        Files.createDirectories(target.getParent());
+                        Files.copy(zipIn, target, StandardCopyOption.REPLACE_EXISTING);
+                        Files.setLastModifiedTime(target, entry.getLastModifiedTime());
+                    }
                 }
                 counter += 1;
                 entry = zipIn.getNextEntry();
