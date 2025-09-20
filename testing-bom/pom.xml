@@ -22,7 +22,7 @@
         <dependencies>
             <dependency>
                 <groupId>de.team33.testing</groupId>
-                <artifactId>sleeping-styx</artifactId>
+                <artifactId>bridging-styx</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
